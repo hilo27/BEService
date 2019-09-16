@@ -9,6 +9,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -31,12 +32,14 @@ public class Record implements Runnable {
     @Override
     public void run() {
         try {
+            // TODO (Руслан): нужно оформить в отдельные методы
             Controller controller = new Controller();
             this.setStatus(Status.RUNNING);
             this.setNewTime();
             controller.updateRecord(this);
 
-            Thread.sleep(9000);
+            //Thread.sleep(9000);
+            TimeUnit.MINUTES.sleep(2);
 
             controller = new Controller();
             this.setStatus(Status.FINISHED);
